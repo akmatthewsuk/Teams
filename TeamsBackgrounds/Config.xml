@@ -1,0 +1,40 @@
+<Config>
+  <Tasks>
+    <Task>
+        <ID>TeamsBackgrounds</ID>
+        <TaskName>User-TeamsBackgrounds</TaskName>
+        <TaskType>User</TaskType>
+        <TaskScriptFolder>C:\Program Files\Deploy\TeamsBackgrounds\Scripts</TaskScriptFolder>
+        <TaskScript>Update-TeamsBackgrounds.vbs</TaskScript>
+        <TaskConfig></TaskConfig>
+        <TaskArgument></TaskArgument>
+        <TaskExecutable>wscript</TaskExecutable>
+        <TaskRun>
+            <Run>
+                <RunType>Daily</RunType>
+                <RunTime>10am</RunTime>
+            </Run>
+            <Run>
+                <RunType>AtLogon</RunType>
+            </Run>
+        </TaskRun>
+        <TaskPrincipal>User</TaskPrincipal>
+        <StartImmediately>Yes</StartImmediately>
+    </Task>
+  </Tasks>
+  <Teams>
+    <BackgroundPath>C:\Program Files\Deploy\TeamsBackgrounds\Images</BackgroundPath>
+    <Backgrounds>
+      <Background>
+        <Image>star-wars-backgrounds-12-1.jpg</Image>
+        <!-- Action can be Add or Remove -->
+        <Action>Add</Action>
+      </Background>
+      <Background>
+        <Image>star-wars-backgrounds-38-1.jpg</Image>
+        <!-- Action can be Add or Remove -->
+        <Action>Add</Action>
+      </Background>
+    </Backgrounds>
+  </Teams>
+</Config>

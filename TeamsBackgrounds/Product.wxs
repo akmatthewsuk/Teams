@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"  xmlns:powershell="http://schemas.gardiner.net.au/PowerShellWixExtensionSchema">
+	<Product Id="*" Name="Teams Backgrounds" Language="1033" Version="1.0.3.0" Manufacturer="ToTheCloudAndBeyond" UpgradeCode="539a0ee9-76bc-4ddb-b3c4-ea31d1ab76ba">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="TeamsBackground" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="Images"/>
+      <ComponentGroupRef Id="Scripts"/>
+    </Feature>
+    <InstallExecuteSequence>
+      <Custom Action="PowerShellScriptsElevatedDeferred" After="RegisterUser">NOT Installed</Custom>
+      <Custom Action="PowerShellScriptsDeferred" After="RegisterUser">NOT Installed</Custom>
+    </InstallExecuteSequence>
+    <powershell:File Id="PSFile1" File="[#BootstrapPS1]" Arguments="&quot;[INSTALLFOLDER]&quot;" Elevated="yes" IgnoreErrors="yes" />
+    
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFiles64Folder">
+        <Directory Id="ORGFOLDER" Name="Deploy">
+          <Directory Id="INSTALLFOLDER" Name="TeamsBackgrounds">
+            <Directory Id="IMAGESFOLDER" Name="Images" />
+            <Directory Id="SCRIPTSFOLDER" Name="Scripts" />
+          </Directory>
+        </Directory>
+      </Directory>
+		</Directory>
+	</Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="ProductComponent" Win64="yes" Guid="218f0a4b-9d37-40be-808f-ce63c266c0be">
+        <File Id="BootstrapPS1" Source="TeamsBootstrap.ps1" KeyPath="yes" />
+        <File Id="ConfigXML" Source="Config.xml" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  
+</Wix>

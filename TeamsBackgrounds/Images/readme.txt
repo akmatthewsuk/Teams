@@ -1,0 +1,1 @@
+Add images in jpg or png format here - Make sure the files are listed in the config file to ensure add or remove
